@@ -29,7 +29,7 @@
                     @csrf
                     <a style="margin: 19px;" href="{{ route('customers.create')}}" class="btn btn-primary">Add New Customer</a>
                     
-                    <button style="margin: 19px;" type="submit" formaction="{{ route('sendEmails') }}" class="btn btn-success mt-3 mr-3">Send Emails</button>
+                    <button style="margin: 19px;" type="submit" formaction="{{ route('sendDiscountEmails') }}" class="btn btn-success mt-3 mr-3">Send Emails</button>
                     <table class="table table-striped">
                         <thead>
                             <tr>
