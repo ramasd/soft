@@ -26,4 +26,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('customers', 'CustomerController');
 });
 
-Route::post('sendEmails', 'CustomerController@sendDiscountEmails')->name('sendEmails');
+Route::post('sendDiscountEmails', 'CustomerController@sendDiscountEmails')->name('sendDiscountEmails');
