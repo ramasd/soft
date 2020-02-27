@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DiscountMail;
 
 class CustomerController extends Controller
 {
@@ -124,5 +126,29 @@ class CustomerController extends Controller
         $customer->delete();
 
         return redirect('/customers')->with('success', 'Customer Deleted!');
+    }
+
+    public function sendDiscountEmails(Request $request)
+    {
+        if($request->input('selected_customers')){
+            $emails = Customer::whereIn('id', $request->input('selected_customers'))->pluck('email');
+
+            foreach ($emails as $email)
+            {
+                $this->sendDiscountEmail($email);
+            }
+            
+            return back()->with('success', 'Emails have been sent!');
+        }else{
+
+            return back()->with('danger', 'You have not selected any customers!');
+        }
+    }
+
+    public function sendDiscountEmail($email = null)
+    {
+        if($email){
+            Mail::to($email)->send(new DiscountMail());
+        }
     }
 }
