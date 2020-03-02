@@ -69,6 +69,7 @@
 
 <script>
     function delete_customer(id) {
+        window.location.reload();
         if(confirm('Are you sure?') ){
             var token = $("meta[name='csrf-token']").attr("content");
 
@@ -80,8 +81,8 @@
                     _method: 'delete',
                     _token :token
                 },
-                success: function (){
-                    console.log('success!');
+                success: function (data) {
+                    console.log(data);
                 },
                 error: function(xhr) {
                     console.log(xhr.responseText);
